@@ -2,6 +2,14 @@
   "name": "employee",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://github.com/Panczel24/employee-sz-monk-r-s#readme",
+  "bugs": {
+    "url": "https://github.com/Panczel24/employee-sz-monk-r-s/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Panczel24/employee-sz-monk-r-s.git"
+  },
   "license": "ISC",
   "author": "",
   "type": "module",
@@ -12,5 +20,6 @@
   "dependencies": {
     "typescript": "^6.0.2",
     "vitest": "^4.1.2"
-  }
+  },
+  "devDependencies": {}
 }
