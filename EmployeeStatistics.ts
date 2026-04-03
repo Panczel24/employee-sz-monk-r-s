@@ -10,4 +10,8 @@ export class EmployeeStatistics {
 
         this.employee = employee;
     }
+
+   
+
+
 }

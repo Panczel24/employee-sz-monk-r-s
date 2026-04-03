@@ -9,17 +9,32 @@ describe("Employees", () => {
         { name: "John Do", age: 32, salary: 50002 },
         { name: "Jon Doe", age: 33, salary: 50003 },
     ];
+    const dolgozok2: Employee[] = [
+        { name: "John Doe", age: 30, salary: 50000 },
+        { name: "John De", age: 31, salary: 50001 },
+        { name: "John Do", age: 32, salary: 50002 },
+        { name: "Jon Doe", age: 33, salary: 50003 },
+    ];
 
-    test("konstruktor teszt - helyes adatok", () => {
+    test("konstruktor teszt első lista - helyes adatok", () => {
         const employeeStatistics = new EmployeeStatistics(dolgozok);
         expect(employeeStatistics.employee).toEqual(dolgozok);
+    });
+
+    test("konstruktor teszt második lista - helyes adatok", () => {
+        const employeeStatistics = new EmployeeStatistics(dolgozok2);
+        expect(employeeStatistics.employee).toEqual(dolgozok2);
     });
 
     test("construktor teszt - üres listával dob hibát", () => {
         expect(() => new EmployeeStatistics([])).toThrow();
     });
 
-    test("construktor teszt - feltöltött listával nem dob hibát", () => {
-    expect(() => new EmployeeStatistics(dolgozok)).not.toThrow();
-  });
+    test("construktor teszt elso lista- feltöltött listával nem dob hibát", () => {
+        expect(() => new EmployeeStatistics(dolgozok)).not.toThrow();
+    });
+
+    test("construktor teszt  második losta- feltöltött listával nem dob hibát", () => {
+        expect(() => new EmployeeStatistics(dolgozok2)).not.toThrow();
+    });
 })
