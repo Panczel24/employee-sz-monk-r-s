@@ -11,7 +11,24 @@ export class EmployeeStatistics {
         this.employee = employee;
     }
 
-   
+    getMaxSalary(): number {
+        if (this.employee.length === 0) {
+            throw new Error("Nincs adat");
+        }
+        let max = this.employee[0]?.salary;
+        if (max === undefined) {
+            throw new Error("Nincs fizetés");
+        }
+        for (let emp of this.employee) {
+            if (emp.salary === undefined) {
+                throw new Error("Nincs fizetés");
+            }
+            if (emp.salary > max) {
+                max = emp.salary;
+            }
+        }
+        return max;
+    }
 
 
 }
