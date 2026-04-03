@@ -31,4 +31,13 @@ export class EmployeeStatistics {
     }
 
 
+    getAverageAge(): number {
+        let atlag = 0;
+        for (let emp of this.employee) {
+            atlag += emp.age;
+        }
+        return atlag / this.employee.length;
+    }
+
+
 }
