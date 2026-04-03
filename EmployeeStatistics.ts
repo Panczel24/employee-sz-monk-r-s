@@ -50,4 +50,18 @@ export class EmployeeStatistics {
     }
 
 
+    countEmployeesOverSalary(salary: number): number {
+        let szam = 0
+        for (let emp of this.employee) {
+            if (emp.salary > salary) {
+                szam++
+            }
+        }
+        return szam;
+    }
+
+
+
+
+
 }
