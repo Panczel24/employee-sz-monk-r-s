@@ -39,5 +39,15 @@ export class EmployeeStatistics {
         return atlag / this.employee.length;
     }
 
+    getHighestPaidEmployee(): Employee {
+        let legtobb = this.employee[0]!;
+        for (let emp of this.employee) {
+            if (emp.salary > legtobb.salary) {
+                legtobb = emp
+            }
+        }
+        return legtobb;
+    }
+
 
 }

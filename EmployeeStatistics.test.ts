@@ -105,7 +105,7 @@ describe("getMaxSalary", () => {
     test("több adatos hiányzó fizetéssel hibát dob", () => {
         const dolgozo = [
             { name: "John Doe", age: 30 } as any,
-            { name: "Joh Doe", age: 30, salary:1000 },
+            { name: "Joh Doe", age: 30, salary: 1000 },
             { name: "Jon Doe", age: 40 } as any
         ];
         const emp = new EmployeeStatistics(dolgozo);
@@ -136,8 +136,8 @@ describe("getAverageAge", () => {
         const employeeStatistics = new EmployeeStatistics(dolgozok2);
         expect(employeeStatistics.getAverageAge()).toBe(35.5);
     });
- 
- 
+
+
     test("első lista - notToBe", () => {
         const employeeStatistics = new EmployeeStatistics(dolgozok);
         expect(employeeStatistics.getAverageAge()).not.toBe(313.5);
@@ -146,5 +146,83 @@ describe("getAverageAge", () => {
         const employeeStatistics = new EmployeeStatistics(dolgozok2);
         expect(employeeStatistics.getAverageAge()).not.toBe(345.5);
     });
+
+    test(" egy elem", () => {
+        const dolgozo = [
+            { name: "John Doe", age: 30, salary: 1000 }
+        ];
+        const emp = new EmployeeStatistics(dolgozo);
+        expect(emp.getAverageAge()).toBe(30);
+    });
+
+})
+
+describe("getHighestPaidEmployee", () => {
+    const dolgozok: Employee[] = [
+        { name: "John Doe", age: 30, salary: 50000 },
+        { name: "John De", age: 31, salary: 50001 },
+        { name: "John Do", age: 32, salary: 50002 },
+        { name: "Jon Doe", age: 33, salary: 50003 },
+    ];
+    const dolgozok2: Employee[] = [
+        { name: "Johannes Doe", age: 34, salary: 50004 },
+        { name: "Johann De", age: 35, salary: 50005 },
+        { name: "Johhny Do", age: 36, salary: 50006 },
+        { name: "Jonn Doe", age: 37, salary: 50007 },
+    ];
+
+    test("első lista - helyes adatok/toBe", () => {
+        const employeeStatistics = new EmployeeStatistics(dolgozok);
+        expect(employeeStatistics.getHighestPaidEmployee()).toBe(employeeStatistics.employee[3]);
+    });
+    test("második lista - helyes adatok/toBe", () => {
+        const employeeStatistics = new EmployeeStatistics(dolgozok2);
+        expect(employeeStatistics.getHighestPaidEmployee()).toBe(employeeStatistics.employee[3]);
+    });
+
+
+    test("első lista - notToBe", () => {
+        const employeeStatistics = new EmployeeStatistics(dolgozok);
+        expect(employeeStatistics.getHighestPaidEmployee()).not.toBe(employeeStatistics.employee[0]);
+    });
+    test("második lista - notToBe", () => {
+        const employeeStatistics = new EmployeeStatistics(dolgozok2);
+        expect(employeeStatistics.getHighestPaidEmployee()).not.toBe(employeeStatistics.employee[0]);
+    });
+
+
+    test(" egy elem", () => {
+        const dolgozo = [
+            { name: "John Doe", age: 30, salary: 1000 }
+        ];
+        const emp = new EmployeeStatistics(dolgozo);
+        expect(emp.getHighestPaidEmployee()).toBe(dolgozo[0]);
+    });
+
+
+    test("első  a legnagyobb elem", () => {
+        const dolgozo = [
+            { name: "John Doe", age: 30, salary: 1000 },
+            { name: "Jon Doe", age: 30, salary: 400 },
+            { name: "John Do", age: 30, salary: 450 },
+        ];
+        const emp = new EmployeeStatistics(dolgozo);
+        expect(emp.getHighestPaidEmployee()).toBe(dolgozo[0]);
+    });
+
+
+    test("több ugyanolyan elem esetén az elsőt odbja LEGNAgyobbnak", () => {
+        const dolgozo = [
+            { name: "John Doe", age: 30, salary: 1000 },
+            { name: "Jon Doe", age: 30, salary: 400 },
+            { name: "John Do", age: 30, salary: 1000 },
+        ];
+        const emp = new EmployeeStatistics(dolgozo);
+        expect(emp.getHighestPaidEmployee()).toBe(dolgozo[0]);
+    });
+
+
+
+
 
 })
