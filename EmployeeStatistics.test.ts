@@ -84,28 +84,6 @@ describe("getMaxSalary", () => {
 
 
 
-    // test(" első lista - notToBe", () => {
-    //     const employeeStatistics = new EmployeeStatistics(dolgozok);
-    //     expect(employeeStatistics.getMaxSalary()).not.toBe(50007);
-    // });
-    // test(" második lista - notToBe", () => {
-    //     const employeeStatistics = new EmployeeStatistics(dolgozok2);
-    //     expect(employeeStatistics.getMaxSalary()).not.toBe(50003);
-    // });
-
-
-    // test("hiba  teszt - üres listával dob hibát", () => {
-    //     const emp = new EmployeeStatistics(dolgozok);
-    //     emp.employee = [];
-    //     expect(() => emp.getMaxSalary()).toThrow();
-    // });
-    // test("hiba  teszt2 - üres listával dob hibát", () => {
-    //     const emp = new EmployeeStatistics(dolgozok2);
-    //     emp.employee = [];
-    //     expect(() => emp.getMaxSalary()).toThrow();
-    // });
-
-
     test(" elso lista- feltöltött listával nem dob hibát", () => {
         const emp = new EmployeeStatistics(dolgozok);
         expect(() => emp.getMaxSalary()).not.toThrow();
@@ -159,14 +137,6 @@ describe("getAverageAge", () => {
     });
 
 
-    // test("első lista - notToBe", () => {
-    //     const employeeStatistics = new EmployeeStatistics(dolgozok);
-    //     expect(employeeStatistics.getAverageAge()).not.toBe(313.5);
-    // });
-    // test("második lista - notToBe", () => {
-    //     const employeeStatistics = new EmployeeStatistics(dolgozok2);
-    //     expect(employeeStatistics.getAverageAge()).not.toBe(345.5);
-    // });
 
     test(" egy elem", () => {
         const dolgozo = [
@@ -202,14 +172,7 @@ describe("getHighestPaidEmployee", () => {
     });
 
 
-    // test("első lista - notToBe", () => {
-    //     const employeeStatistics = new EmployeeStatistics(dolgozok);
-    //     expect(employeeStatistics.getHighestPaidEmployee()).not.toBe(employeeStatistics.employee[0]);
-    // });
-    // test("második lista - notToBe", () => {
-    //     const employeeStatistics = new EmployeeStatistics(dolgozok2);
-    //     expect(employeeStatistics.getHighestPaidEmployee()).not.toBe(employeeStatistics.employee[0]);
-    // });
+
 
 
     test(" egy elem", () => {
@@ -310,25 +273,6 @@ describe("getHighestPaidEmployee", () => {
         });
 
 
-        // test("első lista - 5000 felett keresők - notTOBe", () => {
-        //     const emp = new EmployeeStatistics(dolgozok);
-        //     expect(emp.countEmployeesOverSalary(5000)).not.toBe(4);
-        // });
-        // test("második lista - 8500 felett keresők - notTOBe", () => {
-        //     const emp = new EmployeeStatistics(dolgozok2);
-        //     expect(emp.countEmployeesOverSalary(8500)).not.toBe(4);
-        // });
-
-
-        // test("első lista - 2000 felett keresők - notTOBe", () => {
-        //     const emp = new EmployeeStatistics(dolgozok);
-        //     expect(emp.countEmployeesOverSalary(2000)).not.toBe(3);
-        // });
-        // test("második lista - 600 felett keresők - notTOBe", () => {
-        //     const emp = new EmployeeStatistics(dolgozok2);
-        //     expect(emp.countEmployeesOverSalary(600)).not.toBe(3);
-        // });
-
         test(" egy elem - tobe", () => {
             const dolgozo = [
                 { name: "John Doe", age: 30, salary: 1000 }
@@ -338,17 +282,79 @@ describe("getHighestPaidEmployee", () => {
         });
 
 
-        // test(" egy elem - notToBe", () => {
-        //     const dolgozo = [
-        //         { name: "John Doe", age: 30, salary: 1000 }
-        //     ];
-        //     const emp = new EmployeeStatistics(dolgozo);
-        //     expect(emp.countEmployeesOverSalary(1000)).not.toBe(1);
-        // });
+        test(" negatív érték (dolgozo) egy elemmel", () => {
+            const dolgozo = [
+                { name: "John Doe", age: 30, salary: -1 }
+            ];
+            const emp = new EmployeeStatistics(dolgozo);
+            expect(emp.countEmployeesOverSalary(100)).toBe(0);
+        });
+        test(" negatív érték (dolgozo) több elemmel", () => {
+            const dolgozo = [
+                { name: "John Doe", age: 30, salary: 1000 },
+                { name: "John Doe", age: 30, salary: -1000 },
+                { name: "John Doe", age: 30, salary: 200 },
+                { name: "John Doe", age: 30, salary: -5000 },
+            ];
+            const emp = new EmployeeStatistics(dolgozo);
+            expect(emp.countEmployeesOverSalary(999)).toBe(1);
+        });
 
 
+        test(" negatív érték (emp.countEmployeesOverSalary(-1)) esetén errort dob", () => {
+            const dolgozo = [
+                { name: "John Doe", age: 30, salary: 1000 }
+            ];
+            const emp = new EmployeeStatistics(dolgozo);
+            expect(() => emp.countEmployeesOverSalary(-1)).toThrow();
+        });
+        
 
 
+        test(" nagyobb mint nulla - egy elemmel", () => {
+            const dolgozo = [
+                { name: "John Doe", age: 30, salary: 10000 }
+            ];
+            const emp = new EmployeeStatistics(dolgozo);
+            expect(emp.countEmployeesOverSalary(0)).toBe(1);
+        });
+        test(" nagyobb mint nulla - több elemmel", () => {
+            const dolgozo = [
+                { name: "John Doe", age: 30, salary: 1000 },
+                { name: "John Doe", age: 30, salary: -1000 },
+                { name: "John Doe", age: 30, salary: 200 },
+                { name: "John Doe", age: 30, salary: -5000 },
+            ];
+            const emp = new EmployeeStatistics(dolgozo);
+            expect(emp.countEmployeesOverSalary(0)).toBe(2);
+        });
+
+
+        test(" szélsőérték", () => {
+            const dolgozo = [
+                { name: "John Doe", age: 30, salary: 1000000000000000000000000000000000000000000000 }
+            ];
+            const emp = new EmployeeStatistics(dolgozo);
+            expect(emp.countEmployeesOverSalary(100000000000000000000000000)).toBe(1);
+        });
+        test(" szélsőérték2", () => {
+            const dolgozo = [
+                { name: "John Doe", age: 30, salary: 10000000000000000000000000 }
+            ];
+            const emp = new EmployeeStatistics(dolgozo);
+            expect(emp.countEmployeesOverSalary(10000000000000000000000000000000000000000000000000000000000000)).toBe(0);
+        });
+        test(" szélsőérték3", () => {
+            const dolgozo = [
+                { name: "John Doe", age: 30, salary: 10000000000000000000000000 },
+                { name: "John Doe", age: 30, salary: 1 },
+                { name: "John Doe", age: 30, salary: 0 },
+                { name: "John Doe", age: 30, salary: -1 },
+                { name: "John Doe", age: 30, salary: -10000000000000000000000000 }
+            ];
+            const emp = new EmployeeStatistics(dolgozo);
+            expect(emp.countEmployeesOverSalary(0)).toBe(2);
+        });
 
     });
 

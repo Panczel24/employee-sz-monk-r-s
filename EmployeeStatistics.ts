@@ -20,7 +20,7 @@ export class EmployeeStatistics {
             throw new Error("Nincs fizetés");
         }
         for (let emp of this.employee) {
-            if (emp.salary === undefined || emp.salary<0 ) {
+            if (emp.salary === undefined || emp.salary < 0) {
                 throw new Error("Hibáas fizetés");
             }
             if (emp.salary > max) {
@@ -55,6 +55,9 @@ export class EmployeeStatistics {
         for (let emp of this.employee) {
             if (emp.salary > salary) {
                 szam++
+            }
+            if (salary < 0) {
+                throw new Error("nem lehet negatyv");
             }
         }
         return szam;
