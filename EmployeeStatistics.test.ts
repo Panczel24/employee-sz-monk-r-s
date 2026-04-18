@@ -65,22 +65,22 @@ describe("getMaxSalary", () => {
 
     test("negatív fizetéssel hiba", () => {
         const dolgozo = [
-            { name: "John Doe", age: 30 , salary:-1}
+            { name: "John Doe", age: 30, salary: -1 }
         ];
         const emp = new EmployeeStatistics(dolgozo);
         expect(() => emp.getMaxSalary()).toThrow();
     });
     test("negatív fizetéssel hiba több adat esetén is", () => {
         const dolgozo = [
-            { name: "John Doe", age: 30 , salary:1},
-            { name: "John Doe", age: 30 , salary:-1},
-            { name: "John Doe", age: 30 , salary:2},
-            { name: "John Doe", age: 30 , salary:-5},
+            { name: "John Doe", age: 30, salary: 1 },
+            { name: "John Doe", age: 30, salary: -1 },
+            { name: "John Doe", age: 30, salary: 2 },
+            { name: "John Doe", age: 30, salary: -5 },
         ];
         const emp = new EmployeeStatistics(dolgozo);
         expect(() => emp.getMaxSalary()).toThrow();
     });
-  
+
 
 
 
@@ -287,7 +287,9 @@ describe("getHighestPaidEmployee", () => {
                 { name: "John Doe", age: 30, salary: -1 }
             ];
             const emp = new EmployeeStatistics(dolgozo);
-            expect(emp.countEmployeesOverSalary(100)).toBe(0);
+            // expect(emp.countEmployeesOverSalary(100)).toBe(0);
+            expect(() => emp.countEmployeesOverSalary(0)).toThrow();
+
         });
         test(" negatív érték (dolgozo) több elemmel", () => {
             const dolgozo = [
@@ -297,7 +299,9 @@ describe("getHighestPaidEmployee", () => {
                 { name: "John Doe", age: 30, salary: -5000 },
             ];
             const emp = new EmployeeStatistics(dolgozo);
-            expect(emp.countEmployeesOverSalary(999)).toBe(1);
+            //expect(emp.countEmployeesOverSalary(999)).toBe(1);
+            expect(() => emp.countEmployeesOverSalary(0)).toThrow();
+
         });
 
 
@@ -308,7 +312,7 @@ describe("getHighestPaidEmployee", () => {
             const emp = new EmployeeStatistics(dolgozo);
             expect(() => emp.countEmployeesOverSalary(-1)).toThrow();
         });
-        
+
 
 
         test(" nagyobb mint nulla - egy elemmel", () => {
@@ -321,12 +325,12 @@ describe("getHighestPaidEmployee", () => {
         test(" nagyobb mint nulla - több elemmel", () => {
             const dolgozo = [
                 { name: "John Doe", age: 30, salary: 1000 },
-                { name: "John Doe", age: 30, salary: -1000 },
+                { name: "John Doe", age: 30, salary: 1 },
                 { name: "John Doe", age: 30, salary: 200 },
-                { name: "John Doe", age: 30, salary: -5000 },
+                //{ name: "John Doe", age: 30, salary: -5000 },
             ];
             const emp = new EmployeeStatistics(dolgozo);
-            expect(emp.countEmployeesOverSalary(0)).toBe(2);
+            expect(emp.countEmployeesOverSalary(0)).toBe(3);
         });
 
 
@@ -344,6 +348,17 @@ describe("getHighestPaidEmployee", () => {
             const emp = new EmployeeStatistics(dolgozo);
             expect(emp.countEmployeesOverSalary(10000000000000000000000000000000000000000000000000000000000000)).toBe(0);
         });
+        // test(" szélsőérték3", () => {
+        //     const dolgozo = [
+        //         { name: "John Doe", age: 30, salary: 10000000000000000000000000 },
+        //         { name: "John Doe", age: 30, salary: 1 },
+        //         { name: "John Doe", age: 30, salary: 0 },
+        //         { name: "John Doe", age: 30, salary: -1 },
+        //         { name: "John Doe", age: 30, salary: -10000000000000000000000000 }
+        //     ];
+        //     const emp = new EmployeeStatistics(dolgozo);
+        //     expect(emp.countEmployeesOverSalary(0)).toBe(2);
+        // });
         test(" szélsőérték3", () => {
             const dolgozo = [
                 { name: "John Doe", age: 30, salary: 10000000000000000000000000 },
@@ -353,7 +368,7 @@ describe("getHighestPaidEmployee", () => {
                 { name: "John Doe", age: 30, salary: -10000000000000000000000000 }
             ];
             const emp = new EmployeeStatistics(dolgozo);
-            expect(emp.countEmployeesOverSalary(0)).toBe(2);
+            expect(() => emp.countEmployeesOverSalary(0)).toThrow();
         });
 
     });

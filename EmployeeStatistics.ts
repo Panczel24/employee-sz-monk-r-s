@@ -57,7 +57,10 @@ export class EmployeeStatistics {
                 szam++
             }
             if (salary < 0) {
-                throw new Error("nem lehet negatyv");
+                throw new Error("nem lehet negatív");
+            }
+            if (emp.salary < 0) {
+                throw new Error("Nem lehet negatív");
             }
         }
         return szam;
